@@ -4,7 +4,7 @@ import('chai').then(chai => {
     const {app} = require('../server'); // Make sure the path is correct to your Express applicatio
     const request = require('supertest');
 
-    // Mocha/Chai unit tests
+    //  unit tests
     describe('Test de aanmeldingsfunctionaliteit', () => {
       it('Het aanmeldingsverzoek zou een nieuwe gebruiker moeten toevoegen', (done) => {
         request(app)

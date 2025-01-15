@@ -16,7 +16,7 @@ export function Home(){
     setIsPlaying(!isPlaying);
   };
     const handleLogout = () => {
-        // Voeg hier je uitloglogica toe, zoals het verwijderen van de sessie, enz.
+       
 
         // Navigeer naar de inlogpagina ('/')
         navigate('/');

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link, Navigate, useNavigate} from 'react-router-dom'
 import axios from 'axios'
-import  Validation from './LoginValidation';
+//import  Validation from './LoginValidation';
 
 
 function Login() {
@@ -31,7 +31,7 @@ const handleSubmit = (event) =>{
          
 }
 return(
-<div style={{height:"100vh"}} className='d-flex justify-content-center align-items-center bg-primary w-100'>
+<div style={{height:"100vh"}} className='d-flex justify-content-center align-items-center  w-100'>
 <div className='bg-white p-3 rounded w-25'>
 
     <h2>Sign In</h2>
