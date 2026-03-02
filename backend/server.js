@@ -17,16 +17,17 @@ const db = mysql.createConnection({
 const sanitizeInput = (input) => {
     return input.replace(/['"\\]/g, '');
 };
-
+// POST route voor gebruikersregistratie
 app.post('/signup', (req, res) => {
     const { Name, Email, Password } = req.body;
 
-    // Input validation
+    // Controleer velden aanwezig zijn
     if (!Name || !Email || !Password) {
         return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Sanitiseer de ingevoerde gegevens om SQL-injecties te voorkomen
+  
+  // Sanitize de invoer om SQL-injectie te voorkomen
     const sanitizedEmail = sanitizeInput(Email);
 
    // Controleer of het e-mailadres al in de database bestaat

@@ -1,5 +1,6 @@
 // Dynamic import of Chai
 import('chai').then(chai => {
+//const chai = require ('ch')
     const { assert } = chai;
     const {app} = require('../server'); // Make sure the path is correct to your Express applicatio
     const request = require('supertest');

@@ -140,7 +140,7 @@ export function Home(){
 </div>
 
                     <canvas id="lineChart" width="500" height="300"></canvas>
-                    <audio id="alert-sound" src="alert.mp3" controls ></audio>
+                    <audio id="alert-sound" src="alert.mp3"  ></audio>
            
     </div>
     </div>
