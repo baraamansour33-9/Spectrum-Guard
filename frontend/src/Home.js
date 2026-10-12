@@ -150,6 +150,8 @@ export function Home(){
             <p>Product</p>
             <i class="fas fa-table"></i>
         </div>
+
+        <div className='table-container'>
      <table>
             <thead>
                 <tr>
@@ -191,6 +193,7 @@ export function Home(){
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
         </>
 

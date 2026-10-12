@@ -1,63 +1,140 @@
 import React, { useState } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import {Link, Navigate, useNavigate} from 'react-router-dom'
-import axios from 'axios'
-//import  Validation from './LoginValidation';
-
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './Auth.css';
 
 function Login() {
-const [values,setValues] = useState( { email:'', password: '' })
-const navigate = useNavigate();
-const [errors,setErrors]= useState({})
-const handleInput = (event) =>{
-    setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
-}
+  const [values, setValues] = useState({
+    email: '',
+    password: ''
+  });
 
-const handleSubmit = (event) =>{
-   event.preventDefault();
-   axios.post('http://localhost:3002/login', values)
-    .then(res => {
-     if(res.data === "Success"){
-       /* alert("Success")*/
-        navigate('/home');
-     }else{
-        console.log(res)
-        alert("Please check the password or email address as they are incorrect")
-     }
-    })
-    .catch(err => console.log(err));
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
+  const handleInput = (event) => {
+    setValues((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value
+    }));
+  };
 
-         
-}
-return(
-<div style={{height:"100vh"}} className='d-flex justify-content-center align-items-center  w-100'>
-<div className='bg-white p-3 rounded w-25'>
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setMessage('');
+    setLoading(true);
 
-    <h2>Sign In</h2>
-<form onSubmit = {handleSubmit}>
-    <div className='mb-3'>
-         <label htmlFor="email"><strong>Email </strong></label>
-         <input type = "email" placeholder='Enter Email' name='email' required 
-         onChange={handleInput} className='form-control rounded-0'/>
-         {errors.email && <span className='text-danger'> {errors.email}</span>}
-         </div>
-   
-    <div className='mb-3'>
-         <label htmlFor="password"><strong>Password</strong></label>
-         <input type = "password" placeholder='Enter Password' name='password' required 
-          onChange={handleInput} className='form-control rounded-0'/>
-           {errors.password && <span className='text-danger'> {errors.password}</span>}
+    axios.post('http://localhost:3002/login', values)
+      .then((res) => {
+        if (res.data === 'Success') {
+          navigate('/home');
+        } else {
+          setMessage(
+            'The email or password is incorrect. Please try again.'
+          );
+        }
+      })
+      .catch((err) => {
+        console.error('Login error:', err);
+        setMessage('Unable to log in. Please check your connection and try again.');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  return (
+    <div className="auth-page">
+      <div className="auth-layout">
+
+       
+
+        <main className="auth-main">
+          <section className="auth-card">
+            <div className="auth-logo-small">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path
+                  d="M24 4 40 10v12c0 10-6.5 17-16 22C14.5 39 8 32 8 22V10Z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                />
+                <path
+                  d="M18 29V22 M24 29V16 M30 29V19"
+                  stroke="#079b70"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+
+            <h1>Welcome back</h1>
+            <p className="auth-subtitle">
+              Sign in to continue to Spectrum Guard
+            </p>
+
+            {message && (
+              <div className="auth-message" role="alert">
+                {message}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit}>
+              <div className="auth-field">
+                <label htmlFor="login-email">Email address</label>
+                <input
+                  id="login-email"
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={values.email}
+                  onChange={handleInput}
+                  autoComplete="email"
+                  required
+                />
+              </div>
+
+              <div className="auth-field">
+                <label htmlFor="login-password">Password</label>
+                <input
+                  id="login-password"
+                  type="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  value={values.password}
+                  onChange={handleInput}
+                  autoComplete="current-password"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="auth-submit"
+                disabled={loading}
+              >
+                {loading ? 'Signing in...' : 'Log in'}
+                {!loading && <span aria-hidden="true"> →</span>}
+              </button>
+            </form>
+
+            <div className="auth-divider">
+              <span />
+              <span>or</span>
+              <span />
+            </div>
+
+            <p className="auth-switch">
+              New to Spectrum Guard?
+              <Link to="/signup"> Create account</Link>
+            </p>
+          </section>
+        </main>
+
+      </div>
     </div>
-    <button type='submit' className='btn btn-success w-100 rounden-0'>Log in </button>
-    <p></p>
-    <Link to="/signup"  className='btn btn-default border w-100 bg-light rounded-0 text-decoration-none'>Create Account</Link>
-</form>
-
-</div>
-</div>
-   )
-    
+  );
 }
-export default Login
 
+export default Login;

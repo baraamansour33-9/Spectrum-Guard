@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+!.env.example
+build/
+coverage/
+frontend/public/Word _ Microsoft 365.html
+frontend/public/Word _ Microsoft 365_files/
+frontend/public/x systeem - - Zoekresultaten van afbeeldingen.html
+frontend/public/x systeem - - Zoekresultaten van afbeeldingen_files/
